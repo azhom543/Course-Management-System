@@ -1,13 +1,14 @@
 package hibernate;
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "courses")
 public class Courses {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // Use an appropriate strategy for your database
+    @GeneratedValue(strategy = GenerationType.UUID) // Use an appropriate strategy for your database
     @Column(name = "course_id")
     private UUID course_id;
 
@@ -25,11 +26,12 @@ public class Courses {
 
     @Column(name = "is_started")
     private boolean is_started;
-
     @ManyToOne
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
+    @ManyToMany(mappedBy = "coursesSet",cascade = CascadeType.ALL)
+    private Set<Students> studentsSet;
     public Courses(UUID course_id, String course_name, Date start_date, Date end_date, String level, boolean is_started, Instructor instructor) {
         this.course_id = course_id;
         this.course_name = course_name;
@@ -103,14 +105,14 @@ public class Courses {
 
     @Override
     public String toString() {
-        return "Courses{" +
-                "course_id=" + course_id +
-                ", course_name='" + course_name + '\'' +
-                ", start_date=" + start_date +
-                ", end_date=" + end_date +
-                ", level='" + level + '\'' +
-                ", is_started=" + is_started +
-                ", instructor_id=" + instructor.getId() +
+        return "Courses{" + '\n' +
+                "course_id=" + course_id + '\n' +
+                ", course_name='" + course_name + '\'' + '\n' +
+                ", start_date=" + start_date + '\n' +
+                ", end_date=" + end_date + '\n' +
+                ", level='" + level + '\'' + '\n' +
+                ", is_started=" + is_started + '\n' +
+                ", instructor=" + instructor + '\n' +
                 '}';
     }
 }

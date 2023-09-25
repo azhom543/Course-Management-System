@@ -10,5 +10,7 @@
 
         <mapping class="hibernate.Instructor"/>
         <mapping class="hibernate.Courses"/>
+        <mapping class="hibernate.Students"/>
+        <mapping class="hibernate.InstructorDetails"/>
     </session-factory>
 </hibernate-configuration>

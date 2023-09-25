@@ -22,6 +22,9 @@ public class Instructor {
     private String phone;
     @Column(name = "title")
     private String title;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "instructor_details_id")
+    private InstructorDetails instructorDetails;
     @OneToMany(mappedBy = "instructor",
             cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
     private List<Courses> courses;
@@ -34,13 +37,33 @@ public class Instructor {
         this.courses = courses;
     }
 
-//    public void add(Courses tempCourse){
-//        if (courses == null){
-//            courses = new ArrayList<Courses>();
-//        }
-//        courses.add(tempCourse);
-//        tempCourse.setInstructor(this);
-//    }
+    public void add(Courses tempCourse){
+        if (courses == null){
+            courses = new ArrayList<Courses>();
+        }
+        courses.add(tempCourse);
+        tempCourse.setInstructor(this);
+    }
+
+    public InstructorDetails getInstructorDetails() {
+        return instructorDetails;
+    }
+
+    public void setInstructorDetails(InstructorDetails instructorDetails) {
+        this.instructorDetails = instructorDetails;
+    }
+
+    public Instructor(UUID id, String first_name, String last_name, String email, String phone, String title, InstructorDetails instructorDetails, List<Courses> courses) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.phone = phone;
+        this.title = title;
+        this.instructorDetails = instructorDetails;
+        this.courses = courses;
+    }
+
     //private String tableName = "Instructor";
     public Instructor(UUID id, String first_name, String last_name, String email, String phone, String title){
         this.id = id;
