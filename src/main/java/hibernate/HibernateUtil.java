@@ -15,7 +15,7 @@ import java.sql.DriverManager;
 public class HibernateUtil {
     public Session getSession() {
         Session session = null;
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class).addAnnotatedClass(InstructorDetails.class).addAnnotatedClass(Courses.class).addAnnotatedClass(Students.class).buildSessionFactory();
+        SessionFactory sessionFactory = new Configuration().addAnnotatedClass(Instructor.class).addAnnotatedClass(InstructorDetails.class).addAnnotatedClass(Courses.class).addAnnotatedClass(Students.class).buildSessionFactory();
         session = sessionFactory.openSession();
         return session;
     }

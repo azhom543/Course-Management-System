@@ -18,7 +18,7 @@ import java.util.UUID;
 
 public class Main {
     public static void getInstructorById(UUID instrucctorID){
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class).buildSessionFactory();
+        SessionFactory sessionFactory = new Configuration().addAnnotatedClass(Instructor.class).buildSessionFactory();
         Session session = sessionFactory.openSession();
         System.out.println("Session Built Successfully !!");
         try {
@@ -36,7 +36,7 @@ public class Main {
         }
     }
     public static void addInstructorWithDetails(){
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class).addAnnotatedClass(InstructorDetails.class).buildSessionFactory();
+        SessionFactory sessionFactory = new Configuration().addAnnotatedClass(Instructor.class).addAnnotatedClass(InstructorDetails.class).buildSessionFactory();
         Session session = sessionFactory.openSession();
         System.out.println("Session Built Successfully !!");
         //Create a new user object
@@ -62,7 +62,7 @@ public class Main {
         }
     }
     public static void getStudentCourses(){
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Courses.class).addAnnotatedClass(Students.class).buildSessionFactory();
+        SessionFactory sessionFactory = new Configuration().addAnnotatedClass(Courses.class).addAnnotatedClass(Students.class).buildSessionFactory();
         Session session = sessionFactory.openSession();
         System.out.println("Session Built Successfully !!");
 
