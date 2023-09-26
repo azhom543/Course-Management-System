@@ -1,4 +1,4 @@
-package hibernate;
+package hibernate.entities;
 
 import jakarta.persistence.*;
 
@@ -122,14 +122,14 @@ public class Students {
     @Override
     public String toString() {
         return "Students{" +
-                "studentId=" + studentId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", studentPhone='" + studentPhone + '\'' +
-                ", studentAge=" + studentAge +
-                ", studentEmail='" + studentEmail + '\'' +
-                ", studentGender='" + studentGender + '\'' +
-                ", nationalId='" + nationalId + '\'' +
+                "studentId=" + studentId + '\n' +
+                ", firstName='" + firstName + '\'' + '\n' +
+                ", lastName='" + lastName + '\'' + '\n' +
+                ", studentPhone='" + studentPhone + '\'' + '\n' +
+                ", studentAge=" + studentAge + '\n' +
+                ", studentEmail='" + studentEmail + '\'' + '\n' +
+                ", studentGender='" + studentGender + '\'' + '\n' +
+                ", nationalId='" + nationalId + '\'' + '\n' +
                 '}';
     }
 

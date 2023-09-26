@@ -1,4 +1,4 @@
-package hibernate;
+package hibernate.entities;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -32,7 +32,25 @@ public class Courses {
 
     @ManyToMany(mappedBy = "coursesSet",cascade = CascadeType.ALL)
     private Set<Students> studentsSet;
-    public Courses(UUID course_id, String course_name, Date start_date, Date end_date, String level, boolean is_started, Instructor instructor) {
+
+    public Set<Students> getStudentsSet() {
+        return studentsSet;
+    }
+
+    public void setStudentsSet(Set<Students> studentsSet) {
+        this.studentsSet = studentsSet;
+    }
+
+    public Courses(UUID course_id, String course_name, Date start_date, Date end_date, String level, boolean is_started) {
+        this.course_id = course_id;
+        this.course_name = course_name;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.level = level;
+        this.is_started = is_started;
+    }
+
+    public Courses(UUID course_id, String course_name, Date start_date, Date end_date, String level, boolean is_started, Instructor instructor, Set<Students> studentsSet) {
         this.course_id = course_id;
         this.course_name = course_name;
         this.start_date = start_date;
@@ -40,6 +58,7 @@ public class Courses {
         this.level = level;
         this.is_started = is_started;
         this.instructor = instructor;
+        this.studentsSet = studentsSet;
     }
 
     public Courses() {
@@ -113,6 +132,7 @@ public class Courses {
                 ", level='" + level + '\'' + '\n' +
                 ", is_started=" + is_started + '\n' +
                 ", instructor=" + instructor + '\n' +
+                ", Students=" + studentsSet + '\n' +
                 '}';
     }
 }

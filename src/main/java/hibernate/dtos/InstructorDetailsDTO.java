@@ -1,27 +1,23 @@
-package hibernate;
+package hibernate.dtos;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 
 import java.util.UUID;
-@Entity
-@Table(name = "instructor_details")
-public class InstructorDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "instructor_details_id")
+
+public class InstructorDetailsDTO {
     private UUID id;
-    @Column(name = "youtube_channel")
     private String youtubeChannel;
-    @Column(name = "hobbies")
     private String hobbies;
 
-    public InstructorDetails() {
+    public InstructorDetailsDTO() {
     }
-    public InstructorDetails(UUID id, String youtubeChannel, String hobbies) {
+
+    public InstructorDetailsDTO(UUID id, String youtubeChannel, String hobbies) {
         this.id = id;
         this.youtubeChannel = youtubeChannel;
         this.hobbies = hobbies;
     }
+
     public UUID getId() {
         return id;
     }
@@ -45,6 +41,4 @@ public class InstructorDetails {
     public void setHobbies(String hobbies) {
         this.hobbies = hobbies;
     }
-
-
 }

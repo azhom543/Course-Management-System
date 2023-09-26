@@ -8,9 +8,9 @@
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">1234</property>
 
-        <mapping class="hibernate.Instructor"/>
-        <mapping class="hibernate.Courses"/>
-        <mapping class="hibernate.Students"/>
-        <mapping class="hibernate.InstructorDetails"/>
+        <mapping class="hibernate.entities.Instructor"/>
+        <mapping class="hibernate.entities.Courses"/>
+        <mapping class="hibernate.entities.Students"/>
+        <mapping class="hibernate.entities.InstructorDetails"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,4 +1,4 @@
-package hibernate;
+package hibernate.repositories;
 
 import java.sql.*;
 

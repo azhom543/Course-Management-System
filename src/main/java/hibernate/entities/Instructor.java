@@ -1,4 +1,4 @@
-package hibernate;
+package hibernate.entities;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
@@ -131,74 +131,13 @@ public class Instructor {
 
     @Override
     public String toString() {
-        return "Instructor{" +
-                "id=" + id +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", title='" + title + '\'' +
+        return "Instructor{" + '\n' +
+                "id=" + id + '\n' +
+                ", first_name='" + first_name + '\'' + '\n' +
+                ", last_name='" + last_name + '\'' + '\n' +
+                ", email='" + email + '\'' + '\n' +
+                ", phone='" + phone + '\'' + '\n' +
+                ", title='" + title + '\'' + '\n' +
                 '}';
     }
-
-
-//    public String ViewInstructorDetails(Connection c, String where_clause) throws SQLException {
-//        String generatedResults = " ";
-//        Statement statement = c.createStatement();
-//        String Query = "SELECT * FROM " + tableName;
-//        if (where_clause != null){
-//            Query = Query + " Where " + where_clause + ";";
-//        }
-//        System.out.println(Query);
-//        ResultSet resultset = statement.executeQuery(Query);
-//        while (resultset.next()) {
-//            this.id = UUID.fromString(resultset.getString(1));
-//            this.first_name = resultset.getString(2);
-//            this.last_name = resultset.getString(3);
-//            this.phone = resultset.getString(4);
-//            this.email = resultset.getString(5);
-//            this.title = resultset.getString(6);
-//            generatedResults = generatedResults + "\n" + this.toString();
-//        }
-//        return generatedResults;
-//    }
-
-//    public void RemoveInstructor(Connection c, String where_clause){
-//        String Query = "DELETE FROM " + tableName;
-//        if (where_clause != null){
-//            Query = Query + " Where " + where_clause + ";";
-//        }
-//        System.out.println(Query);
-//        try {
-//            Statement statement = c.createStatement();
-//            statement.executeUpdate(Query);
-//        }catch (SQLException e){
-//            System.out.println(e);
-//        }
-//    }
-
-//    public void AddInstructor(Connection c, String columns, String values){
-//        String Query = "Insert into " + tableName + " ( " + columns + " ) VALUES " + " ( " + values + " );";
-//        System.out.println(Query);
-//        try {
-//            Statement statement = c.createStatement();
-//            statement.executeQuery(Query);
-//        }catch (SQLException e){
-//            System.out.println(e);
-//        }
-//    }
-//
-//    public void UpdateInstructorDetails(Connection c, String SetColumns, String where_clause){
-//        String Query = "UPDATE " + tableName + " SET " + SetColumns;
-//        if (where_clause != null){
-//            Query = Query + " Where " + where_clause + ";";
-//        }
-//        System.out.println(Query);
-//        try {
-//            Statement statement = c.createStatement();
-//            statement.executeQuery(Query);
-//        }catch (SQLException e){
-//            System.out.println(e);
-//        }
-//    }
 }
