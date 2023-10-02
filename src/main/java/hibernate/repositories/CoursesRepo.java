@@ -2,6 +2,7 @@ package hibernate.repositories;
 
 import hibernate.HibernateUtil;
 import hibernate.entities.Courses;
+import hibernate.entities.Instructor;
 import hibernate.entities.Students;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -22,7 +23,6 @@ public class CoursesRepo {
 
         try{
             UUID newId = gen_random_uuid();
-            CoursesRepo coursesRepo = new CoursesRepo();
             Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2023-09-18");
             Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2023-10-12");
             Courses courses = new Courses(newId,"Physics",startDate,endDate,"Beginner", true);
@@ -40,8 +40,7 @@ public class CoursesRepo {
         Session session = hibernateUtil.getSession();
         try{
             session.beginTransaction();
-            // Save the user object to the database
-            session.get(Courses.class,courseID);
+            // Remove the object
             session.remove(session.get(Courses.class,courseID));
             //Commit
             session.getTransaction().commit();
@@ -104,6 +103,30 @@ public class CoursesRepo {
             System.out.println(coursesList);
             //Commit
             session.getTransaction().commit();
+        }finally {
+            hibernateUtil.closeSession(session);
+        }
+    }
+
+    public static void getInstructorsCourses(){
+        HibernateUtil hibernateUtil = new HibernateUtil();
+        Session session = hibernateUtil.getSession();
+        try {
+            session.beginTransaction();
+            // Save the user object to the database
+            String hql = "SELECT c.course_name,(i.first_name || i.last_name) " + "FROM Courses c " + "LEFT JOIN c.instructor i";
+
+            Query<Object[]> query = session.createQuery(hql);
+            List<Object[]> results = query.list();
+
+            for (Object[] result : results) {
+                String courseName = (String) result[0];
+                String instructorFirstName = (String) result[1];
+
+                System.out.println("Course Name: " + courseName);
+                System.out.println("Instructor Name: " + instructorFirstName);
+            }
+            //System.out.println(results);
         }finally {
             hibernateUtil.closeSession(session);
         }

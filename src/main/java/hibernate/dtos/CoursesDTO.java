@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
-
 public class CoursesDTO {
     private UUID course_id;
     private String course_name;

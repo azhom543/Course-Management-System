@@ -5,9 +5,13 @@ import hibernate.entities.Instructor;
 import hibernate.entities.InstructorDetails;
 import hibernate.entities.Students;
 import hibernate.repositories.CoursesRepo;
+import hibernate.repositories.InstructorRepo;
+import hibernate.repositories.JoinsRepo;
+import hibernate.repositories.StudentsRepo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.mapping.Join;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -79,10 +83,8 @@ public class Main {
         return UUID.randomUUID();
     }
     public static void main(String[] args) throws SQLException, ParseException {
-        CoursesRepo coursesRepo = new CoursesRepo();
-//        Courses courses = coursesRepo.getCourseById(UUID.fromString("289fe002-0d40-4ef8-b032-49f4d2cd5a28"));
-//        courses.setCourse_name("Computer Science");
-        coursesRepo.StudentsCourses();
-
+        StudentsRepo studentsRepo = new StudentsRepo();
+        UUID stdID = UUID.fromString("5fb97bb4-96ed-4440-9b71-5b56f72af3c1");
+        JoinsRepo.getStudentsCoursesInstructors();
     }
 }

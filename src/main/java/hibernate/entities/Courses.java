@@ -1,8 +1,7 @@
 package hibernate.entities;
 import jakarta.persistence.*;
-import java.util.Date;
-import java.util.Set;
-import java.util.UUID;
+
+import java.util.*;
 
 @Entity
 @Table(name = "courses")
@@ -31,7 +30,7 @@ public class Courses {
     private Instructor instructor;
 
     @ManyToMany(mappedBy = "coursesSet",cascade = CascadeType.ALL)
-    private Set<Students> studentsSet;
+    private Set<Students> studentsSet = new HashSet<>();
 
     public Set<Students> getStudentsSet() {
         return studentsSet;
@@ -40,7 +39,13 @@ public class Courses {
     public void setStudentsSet(Set<Students> studentsSet) {
         this.studentsSet = studentsSet;
     }
-
+    public void addStudent(Students student) {
+        if (studentsSet == null) {
+            studentsSet = new HashSet<>();
+        }
+        studentsSet.add(student);
+        student.getCoursesSet().add(this);
+    }
     public Courses(UUID course_id, String course_name, Date start_date, Date end_date, String level, boolean is_started) {
         this.course_id = course_id;
         this.course_name = course_name;

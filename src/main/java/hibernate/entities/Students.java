@@ -2,6 +2,7 @@ package hibernate.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,16 +27,22 @@ public class Students {
     private String studentGender;
     @Column(name = "national_id")
     private String nationalId;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(
             name = "students_courses",
             joinColumns = @JoinColumn (name = "student_id"),
             inverseJoinColumns = @JoinColumn (name = "course_id")
     )
-    private Set<Courses> coursesSet;
+    private Set<Courses> coursesSet = new HashSet<>();
     public Students() {
     }
-
+    public void addCourse(Courses course) {
+        if (coursesSet == null) {
+            coursesSet = new HashSet<>();
+        }
+        coursesSet.add(course);
+        course.getStudentsSet().add(this);
+    }
     public Students(UUID studentId, String firstName, String lastName, String studentPhone, int studentAge, String studentEmail, String studentGender, String nationalId) {
         this.studentId = studentId;
         this.firstName = firstName;
@@ -111,8 +118,8 @@ public class Students {
         this.nationalId = nationalId;
     }
 
-    public String getCoursesSet() {
-        return coursesSet.toString();
+    public Set<Courses> getCoursesSet() {
+        return coursesSet;
     }
 
     public void setCoursesSet(Set<Courses> coursesSet) {
@@ -132,67 +139,4 @@ public class Students {
                 ", nationalId='" + nationalId + '\'' + '\n' +
                 '}';
     }
-
-
-//    public String ViewStudentDetails(Connection c, String where_clause) throws SQLException {
-//        String generatedResults = " ";
-//        Statement statement = c.createStatement();
-//        String Query = "SELECT * FROM " + tableName;
-//        if (where_clause != null){
-//            Query = Query + " Where " + where_clause + ";";
-//        }
-//        System.out.println(Query);
-//        ResultSet resultset = statement.executeQuery(Query);
-//        while (resultset.next()) {
-//            this.studentId = UUID.fromString(resultset.getString(1));
-//            this.firstName = resultset.getString(2);
-//            this.lastName = resultset.getString(3);
-//            this.studentPhone = resultset.getString(4);
-//            this.studentAge = resultset.getInt(5);
-//            this.studentEmail = resultset.getString(6);
-//            this.studentGender = resultset.getString(7);
-//            this.nationalId = resultset.getString(8);
-//            generatedResults = generatedResults + "\n" + this.toString();
-//        }
-//        return generatedResults;
-//    }
-//
-//    public void RemoveStudent(Connection c, String where_clause){
-//        String Query = "DELETE FROM " + tableName;
-//        if (where_clause != null){
-//            Query = Query + " Where " + where_clause + ";";
-//        }
-//        System.out.println(Query);
-//        try {
-//            Statement statement = c.createStatement();
-//            statement.executeQuery(Query);
-//        }catch (SQLException e){
-//            System.out.println(e);
-//        }
-//    }
-//
-//    public void AddStudent(Connection c, String columns, String values){
-//        String Query = "Insert into " + tableName + " ( " + columns + " ) VALUES " + " ( " + values + " );";
-//        System.out.println(Query);
-//        try {
-//            Statement statement = c.createStatement();
-//            statement.executeQuery(Query);
-//        }catch (SQLException e){
-//            System.out.println(e);
-//        }
-//    }
-//
-//    public void UpdateStudentDetails(Connection c, String SetColumns, String where_clause){
-//        String Query = "UPDATE " + tableName + " SET " + SetColumns;
-//        if (where_clause != null){
-//            Query = Query + " Where " + where_clause + ";";
-//        }
-//        System.out.println(Query);
-//        try {
-//            Statement statement = c.createStatement();
-//            statement.executeQuery(Query);
-//        }catch (SQLException e){
-//            System.out.println(e);
-//        }
-//    }
 }

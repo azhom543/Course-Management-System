@@ -37,6 +37,16 @@ public class Instructor {
         this.courses = courses;
     }
 
+    public Instructor(UUID id, String first_name, String last_name, String email, String phone, String title, InstructorDetails instructorDetails) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.phone = phone;
+        this.title = title;
+        this.instructorDetails = instructorDetails;
+    }
+
     public void add(Courses tempCourse){
         if (courses == null){
             courses = new ArrayList<Courses>();
